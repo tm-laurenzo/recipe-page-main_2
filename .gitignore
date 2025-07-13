@@ -1,0 +1,50 @@
+# Avoid accidental upload of the Sketch and Figma design files
+#####################################################
+## Please do not remove lines 5 and 6 - thanks! 🙂 ##
+#####################################################
+*.sketch
+*.fig
+
+# Avoid accidental XD upload if you convert the design file
+###############################################
+## Please do not remove line 12 - thanks! 🙂 ##
+###############################################
+*.xd
+
+# Avoid your project being littered with annoying .DS_Store files!
+.DS_Store
+.prettierignore
+
+# Design files (do not remove these lines)
+*.sketch
+*.fig
+*.xd
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor and tool settings
+.prettierignore
+.vscode/
+*.log
+
+# Node and package files (if you add JS tooling)
+node_modules/
+dist/
+build/
+
+# OS generated files
+*.swp
+*.swo
+
+# Ignore font binaries if not needed in repo (optional)
+# *.ttf
+# *.otf
+
+# Ignore image previews/thumbnails (optional)
+# preview.jpg
+
+# Ignore environment files (if used)
+.env
+.env.local
