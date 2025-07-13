@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Omelette Recipe</title>
+    <link rel="icon" type="image/x-icon" href="assets\images\favicon-32x32.png">
+    <!-- Google Fonts Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Custom Properties (Variables) for colors from the style guide */
+        :root {
+            --color-white: hsl(0, 0%, 100%);
+            --color-stone-100: hsl(30, 54%, 90%); /* Eggshell */
+            --color-stone-150: hsl(30, 18%, 87%); /* Light Grey */
+            --color-stone-600: hsl(30, 10%, 34%); /* Wenge Brown */
+            --color-stone-900: hsl(24, 5%, 18%); /* Dark Charcoal */
+            --color-brown-800: hsl(14, 45%, 36%); /* Nutmeg */
+            --color-rose-800: hsl(332, 51%, 32%); /* Dark Raspberry */
+            --color-rose-50: hsl(330, 100%, 98%); /* Rose White */
+        }
+
+        /* Base styles for larger screens (desktop-first approach) */
+        body {
+            font-family: 'Outfit', sans-serif; /* Outfit for body text */
+            font-size: 16px; /* Body copy font size */
+            background-color: var(--color-stone-100); /* Eggshell background */
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: flex-start; /* Align content to the top */
+            min-height: 100vh;
+            padding: 2rem 1rem; /* Padding around the main container on desktop */
+            margin: 0; /* Remove default body margin */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--color-stone-600); /* Wenge Brown for general text */
+            line-height: 1.5;
+        }
+
+        .container {
+            background-color: var(--color-white);
+            max-width: 768px; /* Max width for the content container on desktop */
+            width: 100%; /* Ensure it takes full width up to max-width */
+            border-radius: 1.5rem; /* Rounded corners for the card on desktop */
+            padding: 2.5rem; /* Internal padding for the card on desktop */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+
+        .recipe-image {
+            border-radius: 0.75rem; /* Rounded corners for image on desktop */
+            width: 100%; /* Image fills its container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover;
+            margin-bottom: 2rem; /* Spacing below image */
+        }
+
+        h1 {
+            font-family: 'Young Serif', serif; /* Young Serif for main headings */
+            font-size: 2.5rem; /* Large heading size */
+            font-weight: 400; /* Young Serif only has 400 weight */
+            margin-bottom: 1.5rem;
+            color: var(--color-stone-900); /* Dark Charcoal */
+        }
+
+        h2 {
+            font-family: 'Young Serif', serif; /* Young Serif for sub-headings */
+            font-size: 2rem; /* Medium heading size */
+            font-weight: 400; /* Young Serif only has 400 weight */
+            margin-bottom: 1.5rem;
+            color: var(--color-brown-800); /* Nutmeg */
+        }
+
+        p {
+            margin-bottom: 2rem;
+        }
+
+        /* Preparation Time Section */
+        .preparation-time {
+            background-color: var(--color-rose-50); /* Rose White background */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .preparation-time h3 {
+            font-family: 'Outfit', sans-serif; /* Outfit for this sub-heading */
+            font-size: 1.25rem;
+            font-weight: 700; /* Bold weight for this heading */
+            margin-bottom: 1rem;
+            color: var(--color-rose-800); /* Dark Raspberry */
+        }
+
+        .preparation-time ul {
+            list-style-type: none; /* Remove default bullet */
+            padding-left: 1.5rem;
+            margin: 0; /* Remove default margin */
+        }
+
+        .preparation-time ul li {
+            position: relative;
+            padding-left: 1.5em; /* Space for custom bullet */
+            margin-bottom: 0.5rem;
+        }
+
+        .preparation-time ul li::before {
+            content: "•"; /* Custom bullet point */
+            color: var(--color-rose-800);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* Ingredients and Instructions Lists */
+        .ingredients ul,
+        .instructions ol {
+            list-style-type: none; /* Remove default bullet/number */
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .ingredients ul li,
+        .instructions ol li {
+            position: relative;
+            padding-left: 1.5em; /* Space for custom bullet/number */
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredients ul li::before {
+            content: "•"; /* Custom bullet point for ingredients */
+            color: var(--color-brown-800);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .instructions ol {
+            counter-reset: item; /* Reset counter for ordered list */
+        }
+
+        .instructions ol li::before {
+            content: counter(item) "."; /* Custom numbered list */
+            counter-increment: item;
+            color: var(--color-brown-800);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .instructions ol li strong {
+            font-weight: 700; /* Bold weight for strong text */
+            color: var(--color-stone-900); /* Dark Charcoal */
+        }
+
+        /* Horizontal Rule (Separator) */
+        hr {
+            border: none; /* Remove default border */
+            border-top: 1px solid var(--color-stone-150); /* Light Grey separator */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Nutrition Table */
+        .nutrition-table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse; /* Remove space between borders */
+        }
+
+        .nutrition-table th,
+        .nutrition-table td {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 1.5rem; /* Padding for table cells */
+            border-bottom: 1px solid var(--color-stone-150); /* Light Grey border */
+        }
+
+        .nutrition-table tr:last-child th,
+        .nutrition-table tr:last-child td {
+            border-bottom: none; /* No border for the last row */
+        }
+
+        .nutrition-table th {
+            font-weight: 400; /* Regular weight for table headers */
+        }
+
+        .nutrition-table td {
+            color: var(--color-brown-800); /* Nutmeg for nutrition values */
+            font-weight: 700; /* Bold weight for nutrition values */
+        }
+
+        /* Responsive adjustments for mobile design (max-width: 375px from style guide) */
+        /* Using 767px as a common breakpoint to ensure smooth transition on tablets/larger phones */
+        @media (max-width: 767px) {
+            body {
+                padding: 0; /* Remove padding for full width on mobile */
+                align-items: flex-start; /* Align to top on mobile */
+            }
+            .container {
+                border-radius: 0; /* No border-radius on mobile for full-width image */
+                padding: 0; /* Remove padding from container itself */
+                box-shadow: none; /* No shadow on mobile */
+            }
+            .content-wrapper {
+                padding: 2rem 1.5rem; /* Add internal padding to content on mobile */
+            }
+            .recipe-image {
+                border-radius: 0; /* No border-radius for image on mobile */
+            }
+            h1 {
+                font-size: 2rem; /* Adjust heading size for mobile */
+            }
+            h2 {
+                font-size: 1.75rem; /* Adjust heading size for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="assets\images\image-omelette.jpeg" alt="Simple Omelette" class="recipe-image">
+        <!-- Fallback image in case the provided image URL doesn't work -->
+        <div class="content-wrapper">
+            <h1>Simple Omelette Recipe</h1>
+
+            <p>
+                An easy and quick dish, perfect for any meal. This classic omelette combines beaten eggs
+                cooked to perfection, optionally filled with your choice of cheese, vegetables, or meats.
+            </p>
+
+            <div class="preparation-time">
+                <h3>Preparation time</h3>
+                <ul>
+                    <li><strong>Total:</strong> Approximately 10 minutes</li>
+                    <li><strong>Preparation:</strong> 5 minutes</li>
+                    <li><strong>Cooking:</strong> 5 minutes</li>
+                </ul>
+            </div>
+
+            <h2>Ingredients</h2>
+            <ul>
+                <li>2-3 large eggs</li>
+                <li>Salt, to taste</li>
+                <li>Pepper, to taste</li>
+                <li>1 tablespoon of butter or oil</li>
+                <li>Optional fillings: cheese, diced vegetables, cooked meats, herbs</li>
+            </ul>
+
+            <hr>
+
+            <h2>Instructions</h2>
+            <ol>
+                <li>
+                    <strong>Beat the eggs:</strong> In a bowl, beat the eggs with a pinch of salt and pepper until they are well mixed. You can add a tablespoon of water or milk for a fluffier texture.
+                </li>
+                <li>
+                    <strong>Heat the pan:</strong> Place a non-stick frying pan over medium heat and add butter or oil.
+                </li>
+                <li>
+                    <strong>Cook the omelette:</strong> Once the butter is melted and bubbling, pour in the eggs. Tilt the pan to ensure the eggs evenly coat the surface.
+                </li>
+                <li>
+                    <strong>Add fillings (optional):</strong> When the eggs begin to set at the edges but are still slightly runny in the middle, sprinkle your chosen fillings over one half of the omelette.
+                </li>
+                <li>
+                    <strong>Fold and serve:</strong> As the omelette continues to cook, carefully lift one edge and fold it over the other half. Let it cook for another minute, then slide it onto a plate.
+                </li>
+                <li>
+                    <strong>Enjoy:</strong> Serve hot, with additional salt and pepper if needed.
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2>Nutrition</h2>
+            <p>
+                The table below shows nutritional values per serving without the additional fillings.
+            </p>
+
+            <table class="nutrition-table">
+                <tbody>
+                    <tr>
+                        <th>Calories</th>
+                        <td>277kcal</td>
+                    </tr>
+                    <tr>
+                        <th>Carbs</th>
+                        <td>0g</td>
+                    </tr>
+                    <tr>
+                        <th>Protein</th>
+                        <td>20g</td>
+                    </tr>
+                    <tr>
+                        <th>Fat</th>
+                        <td>22g</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
